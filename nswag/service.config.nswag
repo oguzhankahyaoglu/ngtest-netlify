@@ -2,7 +2,7 @@
   "runtime": "Default",
   "swaggerGenerator": {
     "fromSwagger": {
-      "url": "http://cms.okahyaoglu.net/api/content/okahyaoglunet/swagger/v1/swagger.json",
+      "url": "https://cms.okahyaoglu.net/api/content/okahyaoglunet/swagger/v1/swagger.json",
       "output": null
     }
   },

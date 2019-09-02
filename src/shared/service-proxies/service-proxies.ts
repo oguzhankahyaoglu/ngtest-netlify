@@ -26,7 +26,7 @@ export class ServiceProxy extends BaseClient {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         super();
         this.http = http;
-        this.baseUrl = baseUrl ? baseUrl : "http://cms.okahyaoglu.net/api";
+        this.baseUrl = baseUrl ? baseUrl : "https://cms.okahyaoglu.net/api";
     }
 
     /**
@@ -41,15 +41,15 @@ export class ServiceProxy extends BaseClient {
     queryProjectContents(top: number | null | undefined, skip: number | null | undefined, filter: string | null | undefined, search: string | null | undefined, orderby: string | null | undefined): Observable<Anonymous> {
         let url_ = this.baseUrl + "/content/okahyaoglunet/project?";
         if (top !== undefined)
-            url_ += "$top=" + encodeURIComponent("" + top) + "&"; 
+            url_ += "$top=" + encodeURIComponent("" + top) + "&";
         if (skip !== undefined)
-            url_ += "$skip=" + encodeURIComponent("" + skip) + "&"; 
+            url_ += "$skip=" + encodeURIComponent("" + skip) + "&";
         if (filter !== undefined)
-            url_ += "$filter=" + encodeURIComponent("" + filter) + "&"; 
+            url_ += "$filter=" + encodeURIComponent("" + filter) + "&";
         if (search !== undefined)
-            url_ += "$search=" + encodeURIComponent("" + search) + "&"; 
+            url_ += "$search=" + encodeURIComponent("" + search) + "&";
         if (orderby !== undefined)
-            url_ += "orderby=" + encodeURIComponent("" + orderby) + "&"; 
+            url_ += "orderby=" + encodeURIComponent("" + orderby) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -78,8 +78,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processQueryProjectContents(response: HttpResponseBase): Observable<Anonymous> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -108,11 +108,11 @@ export class ServiceProxy extends BaseClient {
     /**
      * Create a Project content.
      * @param data The data of the content to be created or updated.
-                
-    Please note that each field is an object with one entry per language. 
+
+    Please note that each field is an object with one entry per language.
     If the field is not localizable you must use iv (Invariant Language) as a key.
     When you change the field to be localizable the value will become the value for the master language, depending what the master language is at this point of time.
-    
+
     Read more about it at: https://docs.squidex.io/04-guides/02-api.html
      * @param publish (optional) Set to true to autopublish content.
      * @return Project content created.
@@ -120,7 +120,7 @@ export class ServiceProxy extends BaseClient {
     createProjectContent(data: ProjectDto, publish: boolean | null | undefined): Observable<ProjectContentDto> {
         let url_ = this.baseUrl + "/content/okahyaoglunet/project?";
         if (publish !== undefined)
-            url_ += "publish=" + encodeURIComponent("" + publish) + "&"; 
+            url_ += "publish=" + encodeURIComponent("" + publish) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(data);
@@ -130,7 +130,7 @@ export class ServiceProxy extends BaseClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -153,8 +153,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processCreateProjectContent(response: HttpResponseBase): Observable<ProjectContentDto> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -189,7 +189,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/project/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -218,8 +218,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processGetProjectContent(response: HttpResponseBase): Observable<ProjectContentDto> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -252,11 +252,11 @@ export class ServiceProxy extends BaseClient {
     /**
      * Update a Project content.
      * @param data The data of the content to be created or updated.
-                
-    Please note that each field is an object with one entry per language. 
+
+    Please note that each field is an object with one entry per language.
     If the field is not localizable you must use iv (Invariant Language) as a key.
     When you change the field to be localizable the value will become the value for the master language, depending what the master language is at this point of time.
-    
+
     Read more about it at: https://docs.squidex.io/04-guides/02-api.html
      * @param id The id of the Project content (GUID).
      * @return Project content updated.
@@ -265,7 +265,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/project/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(data);
@@ -275,7 +275,7 @@ export class ServiceProxy extends BaseClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -298,8 +298,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processUpdateProjectContent(response: HttpResponseBase): Observable<ProjectDto> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -332,11 +332,11 @@ export class ServiceProxy extends BaseClient {
     /**
      * Patch a Project content.
      * @param data The data of the content to be created or updated.
-                
-    Please note that each field is an object with one entry per language. 
+
+    Please note that each field is an object with one entry per language.
     If the field is not localizable you must use iv (Invariant Language) as a key.
     When you change the field to be localizable the value will become the value for the master language, depending what the master language is at this point of time.
-    
+
     Read more about it at: https://docs.squidex.io/04-guides/02-api.html
      * @param id The id of the Project content (GUID).
      * @return Project content patched.
@@ -345,7 +345,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/project/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(data);
@@ -355,7 +355,7 @@ export class ServiceProxy extends BaseClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -378,8 +378,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processPathProjectContent(response: HttpResponseBase): Observable<ProjectDto> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -418,7 +418,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/project/{id}/publish";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -446,8 +446,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processPublishProjectContent(response: HttpResponseBase): Observable<void> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -483,7 +483,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/project/{id}/unpublish";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -511,8 +511,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processUnpublishProjectContent(response: HttpResponseBase): Observable<void> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -548,7 +548,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/project/{id}/archive";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -576,8 +576,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processArchiveProjectContent(response: HttpResponseBase): Observable<void> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -613,7 +613,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/project/{id}/restore";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -641,8 +641,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processRestoreProjectContent(response: HttpResponseBase): Observable<void> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -678,7 +678,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/project/{id}/";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -706,8 +706,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processDeleteProjectContent(response: HttpResponseBase): Observable<void> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -746,15 +746,15 @@ export class ServiceProxy extends BaseClient {
     queryWorkexperienceContents(top: number | null | undefined, skip: number | null | undefined, filter: string | null | undefined, search: string | null | undefined, orderby: string | null | undefined): Observable<Anonymous2> {
         let url_ = this.baseUrl + "/content/okahyaoglunet/workexperience?";
         if (top !== undefined)
-            url_ += "$top=" + encodeURIComponent("" + top) + "&"; 
+            url_ += "$top=" + encodeURIComponent("" + top) + "&";
         if (skip !== undefined)
-            url_ += "$skip=" + encodeURIComponent("" + skip) + "&"; 
+            url_ += "$skip=" + encodeURIComponent("" + skip) + "&";
         if (filter !== undefined)
-            url_ += "$filter=" + encodeURIComponent("" + filter) + "&"; 
+            url_ += "$filter=" + encodeURIComponent("" + filter) + "&";
         if (search !== undefined)
-            url_ += "$search=" + encodeURIComponent("" + search) + "&"; 
+            url_ += "$search=" + encodeURIComponent("" + search) + "&";
         if (orderby !== undefined)
-            url_ += "orderby=" + encodeURIComponent("" + orderby) + "&"; 
+            url_ += "orderby=" + encodeURIComponent("" + orderby) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -783,8 +783,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processQueryWorkexperienceContents(response: HttpResponseBase): Observable<Anonymous2> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -813,11 +813,11 @@ export class ServiceProxy extends BaseClient {
     /**
      * Create a Workexperience content.
      * @param data The data of the content to be created or updated.
-                
-    Please note that each field is an object with one entry per language. 
+
+    Please note that each field is an object with one entry per language.
     If the field is not localizable you must use iv (Invariant Language) as a key.
     When you change the field to be localizable the value will become the value for the master language, depending what the master language is at this point of time.
-    
+
     Read more about it at: https://docs.squidex.io/04-guides/02-api.html
      * @param publish (optional) Set to true to autopublish content.
      * @return Workexperience content created.
@@ -825,7 +825,7 @@ export class ServiceProxy extends BaseClient {
     createWorkexperienceContent(data: WorkexperienceDto, publish: boolean | null | undefined): Observable<WorkexperienceContentDto> {
         let url_ = this.baseUrl + "/content/okahyaoglunet/workexperience?";
         if (publish !== undefined)
-            url_ += "publish=" + encodeURIComponent("" + publish) + "&"; 
+            url_ += "publish=" + encodeURIComponent("" + publish) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(data);
@@ -835,7 +835,7 @@ export class ServiceProxy extends BaseClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -858,8 +858,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processCreateWorkexperienceContent(response: HttpResponseBase): Observable<WorkexperienceContentDto> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -894,7 +894,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/workexperience/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -923,8 +923,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processGetWorkexperienceContent(response: HttpResponseBase): Observable<WorkexperienceContentDto> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -957,11 +957,11 @@ export class ServiceProxy extends BaseClient {
     /**
      * Update a Workexperience content.
      * @param data The data of the content to be created or updated.
-                
-    Please note that each field is an object with one entry per language. 
+
+    Please note that each field is an object with one entry per language.
     If the field is not localizable you must use iv (Invariant Language) as a key.
     When you change the field to be localizable the value will become the value for the master language, depending what the master language is at this point of time.
-    
+
     Read more about it at: https://docs.squidex.io/04-guides/02-api.html
      * @param id The id of the Workexperience content (GUID).
      * @return Workexperience content updated.
@@ -970,7 +970,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/workexperience/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(data);
@@ -980,7 +980,7 @@ export class ServiceProxy extends BaseClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1003,8 +1003,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processUpdateWorkexperienceContent(response: HttpResponseBase): Observable<WorkexperienceDto> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -1037,11 +1037,11 @@ export class ServiceProxy extends BaseClient {
     /**
      * Patch a Workexperience content.
      * @param data The data of the content to be created or updated.
-                
-    Please note that each field is an object with one entry per language. 
+
+    Please note that each field is an object with one entry per language.
     If the field is not localizable you must use iv (Invariant Language) as a key.
     When you change the field to be localizable the value will become the value for the master language, depending what the master language is at this point of time.
-    
+
     Read more about it at: https://docs.squidex.io/04-guides/02-api.html
      * @param id The id of the Workexperience content (GUID).
      * @return Workexperience content patched.
@@ -1050,7 +1050,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/workexperience/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(data);
@@ -1060,7 +1060,7 @@ export class ServiceProxy extends BaseClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1083,8 +1083,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processPathWorkexperienceContent(response: HttpResponseBase): Observable<WorkexperienceDto> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -1123,7 +1123,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/workexperience/{id}/publish";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1151,8 +1151,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processPublishWorkexperienceContent(response: HttpResponseBase): Observable<void> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -1188,7 +1188,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/workexperience/{id}/unpublish";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1216,8 +1216,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processUnpublishWorkexperienceContent(response: HttpResponseBase): Observable<void> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -1253,7 +1253,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/workexperience/{id}/archive";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1281,8 +1281,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processArchiveWorkexperienceContent(response: HttpResponseBase): Observable<void> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -1318,7 +1318,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/workexperience/{id}/restore";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1346,8 +1346,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processRestoreWorkexperienceContent(response: HttpResponseBase): Observable<void> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -1383,7 +1383,7 @@ export class ServiceProxy extends BaseClient {
         let url_ = this.baseUrl + "/content/okahyaoglunet/workexperience/{id}/";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1411,8 +1411,8 @@ export class ServiceProxy extends BaseClient {
 
     protected processDeleteWorkexperienceContent(response: HttpResponseBase): Observable<void> {
         const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
@@ -1473,7 +1473,7 @@ export class ProjectTitleProperty implements IProjectTitleProperty {
         data = typeof data === 'object' ? data : {};
         data["en"] = this.en;
         data["tr"] = this.tr;
-        return data; 
+        return data;
     }
 }
 
@@ -1517,7 +1517,7 @@ export class ProjectSubtitleProperty implements IProjectSubtitleProperty {
         data = typeof data === 'object' ? data : {};
         data["en"] = this.en;
         data["tr"] = this.tr;
-        return data; 
+        return data;
     }
 }
 
@@ -1561,7 +1561,7 @@ export class ProjectDescriptionProperty implements IProjectDescriptionProperty {
         data = typeof data === 'object' ? data : {};
         data["en"] = this.en;
         data["tr"] = this.tr;
-        return data; 
+        return data;
     }
 }
 
@@ -1601,7 +1601,7 @@ export class ProjectOrderProperty implements IProjectOrderProperty {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["iv"] = this.iv;
-        return data; 
+        return data;
     }
 }
 
@@ -1639,7 +1639,7 @@ export class ProjectLinkProperty implements IProjectLinkProperty {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["iv"] = this.iv;
-        return data; 
+        return data;
     }
 }
 
@@ -1677,7 +1677,7 @@ export class ProjectImageFolderNameProperty implements IProjectImageFolderNamePr
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["iv"] = this.iv;
-        return data; 
+        return data;
     }
 }
 
@@ -1723,7 +1723,7 @@ export class ProjectImagesProperty implements IProjectImagesProperty {
             for (let item of this.iv)
                 data["iv"].push(item);
         }
-        return data; 
+        return data;
     }
 }
 
@@ -1769,7 +1769,7 @@ export class ProjectThumbsProperty implements IProjectThumbsProperty {
             for (let item of this.iv)
                 data["iv"].push(item);
         }
-        return data; 
+        return data;
     }
 }
 
@@ -1838,7 +1838,7 @@ export class ProjectDto implements IProjectDto {
         data["ImageFolderName"] = this.imageFolderName ? this.imageFolderName.toJSON() : <any>undefined;
         data["Images"] = this.images ? this.images.toJSON() : <any>undefined;
         data["Thumbs"] = this.thumbs ? this.thumbs.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -1921,7 +1921,7 @@ export class ProjectContentDto implements IProjectContentDto {
         data["lastModified"] = this.lastModified ? this.lastModified.toISOString(true) : <any>undefined;
         data["orderNo"] = this.orderNo;
         data["lastModifiedBy"] = this.lastModifiedBy;
-        return data; 
+        return data;
     }
 }
 
@@ -1977,7 +1977,7 @@ export class WorkexperiencePlaceProperty implements IWorkexperiencePlaceProperty
         data = typeof data === 'object' ? data : {};
         data["en"] = this.en;
         data["tr"] = this.tr;
-        return data; 
+        return data;
     }
 }
 
@@ -2017,7 +2017,7 @@ export class WorkexperiencePositionProperty implements IWorkexperiencePositionPr
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["iv"] = this.iv;
-        return data; 
+        return data;
     }
 }
 
@@ -2059,7 +2059,7 @@ export class WorkexperienceDateRangeProperty implements IWorkexperienceDateRange
         data = typeof data === 'object' ? data : {};
         data["en"] = this.en;
         data["tr"] = this.tr;
-        return data; 
+        return data;
     }
 }
 
@@ -2103,7 +2103,7 @@ export class WorkexperienceDescriptionProperty implements IWorkexperienceDescrip
         data = typeof data === 'object' ? data : {};
         data["en"] = this.en;
         data["tr"] = this.tr;
-        return data; 
+        return data;
     }
 }
 
@@ -2143,7 +2143,7 @@ export class WorkexperienceSortProperty implements IWorkexperienceSortProperty {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["iv"] = this.iv;
-        return data; 
+        return data;
     }
 }
 
@@ -2200,7 +2200,7 @@ export class WorkexperienceDto implements IWorkexperienceDto {
         data["DateRange"] = this.dateRange ? this.dateRange.toJSON() : <any>undefined;
         data["Description"] = this.description ? this.description.toJSON() : <any>undefined;
         data["Sort"] = this.sort ? this.sort.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -2277,7 +2277,7 @@ export class WorkexperienceContentDto implements IWorkexperienceContentDto {
         data["lastModified"] = this.lastModified ? this.lastModified.toISOString(true) : <any>undefined;
         data["orderNo"] = this.orderNo;
         data["lastModifiedBy"] = this.lastModifiedBy;
-        return data; 
+        return data;
     }
 }
 
@@ -2345,7 +2345,7 @@ export class ErrorDto implements IErrorDto {
                 data["Details"].push(item);
         }
         data["StatusCode"] = this.statusCode;
-        return data; 
+        return data;
     }
 }
 
@@ -2402,7 +2402,7 @@ export class Anonymous implements IAnonymous {
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -2457,7 +2457,7 @@ export class Anonymous2 implements IAnonymous2 {
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -2470,10 +2470,10 @@ export interface IAnonymous2 {
 
 export class SwaggerException extends Error {
     message: string;
-    status: number; 
-    response: string; 
+    status: number;
+    response: string;
     headers: { [key: string]: any; };
-    result: any; 
+    result: any;
 
     constructor(message: string, status: number, response: string, headers: { [key: string]: any; }, result: any) {
         super();
@@ -2505,12 +2505,12 @@ function blobToText(blob: any): Observable<string> {
             observer.next("");
             observer.complete();
         } else {
-            let reader = new FileReader(); 
-            reader.onload = event => { 
+            let reader = new FileReader();
+            reader.onload = event => {
                 observer.next((<any>event.target).result);
                 observer.complete();
             };
-            reader.readAsText(blob); 
+            reader.readAsText(blob);
         }
     });
 }
