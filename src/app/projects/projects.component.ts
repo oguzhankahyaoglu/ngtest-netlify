@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService, ProjectContentDto } from '@angular-schule/okahyaogluapi';
+import { ServiceProxy, ProjectContentDto } from 'src/shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-projects',
@@ -7,11 +7,11 @@ import { ProjectService, ProjectContentDto } from '@angular-schule/okahyaogluapi
   styleUrls: ['./projects.component.less']
 })
 export class ProjectsComponent implements OnInit {
-  projects: ProjectContentDto[] = [];
+  projects: ProjectContentDto[];
 
-  constructor(private apiGateway: ProjectService) { }
+  constructor(private apiGateway: ServiceProxy) { }
   ngOnInit() {
-    this.apiGateway.queryProjectContents().subscribe(e => this.projects = e.items);
+    this.apiGateway.queryProjectContents(100, undefined, undefined, undefined, undefined).subscribe(e => this.projects = e.items);
 
   }
 }
