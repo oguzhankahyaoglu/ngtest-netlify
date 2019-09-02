@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-schule/okahyaogluapi": "file:@angular-schule/okahyaogluapi",
     "@angular/animations": "~8.2.4",
     "@angular/common": "~8.2.4",
     "@angular/compiler": "~8.2.4",
