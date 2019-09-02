@@ -24,7 +24,7 @@ export class ServiceProxy extends BaseClient {
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        super();
+        super(http);
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "https://cms.okahyaoglu.net/api";
     }
